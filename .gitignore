@@ -1,12 +1,30 @@
+.idea/
+*.iml
+misc.xml
+deploymentTargetDropDown.xml
+render.experimental.xml
+
 # Gradle files
 .gradle/
 build/
+
+# Local SDK/NDK settings
+local.properties
+.cxx/
+
+# Build outputs & generated
+*.apk
+output.json
+captures/
+.externalNativeBuild/
 
 # Local configuration file (sdk path, etc)
 local.properties
 
 # Log/OS Files
 *.log
+.DS_Store
+Thumbs.db
 
 # Android Studio generated files and folders
 captures/
