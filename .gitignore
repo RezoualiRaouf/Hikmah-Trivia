@@ -1,0 +1,22 @@
+# Android/Gradle
+.gradle/
+.idea/
+*.iml
+local.properties
+**/build/
+
+# Output
+*.apk
+output.json
+
+# Keys
+*.jks
+*.keystore
+
+# Logs
+*.log
+
+# macOS / Windows
+.DS_Store
+Thumbs.db
+

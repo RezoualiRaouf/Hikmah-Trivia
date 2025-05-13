@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Base Material 3 colors -->
+    <color name="primary">#6750A4</color>
+    <color name="on_primary">#FFFFFF</color>
+    <color name="primary_container">#EADDFF</color>
+    <color name="on_primary_container">#21005D</color>
+
+    <color name="secondary">#625B71</color>
+    <color name="on_secondary">#FFFFFF</color>
+    <color name="secondary_container">#E8DEF8</color>
+    <color name="on_secondary_container">#1D192B</color>
+
+    <color name="tertiary">#7D5260</color>
+    <color name="on_tertiary">#FFFFFF</color>
+    <color name="tertiary_container">#FFD8E4</color>
+    <color name="on_tertiary_container">#31111D</color>
+
+    <color name="background">#F5F0FF</color>
+    <color name="on_background">#1C1B1F</color>
+    <color name="surface">#FEF7FF</color>
+    <color name="on_surface">#1C1B1F</color>
+
+    <color name="outline">#79747E</color>
+    <color name="outline_variant">#C4C7C5</color>
+
+    <!-- Quiz specific colors -->
+    <color name="answer_button_background">#E8DEF8</color>
+    <color name="correct_answer">#2F9E44</color>
+    <color name="wrong_answer">#E03131</color>
+    <color name="dark_text">#1C1B1F</color>
+    <color name="light_text">#FFFFFF</color>
+</resources>
