@@ -58,4 +58,9 @@ class QuizViewModel : ViewModel() {
     fun needsNewQuestion(): Boolean {
         return _needsNewQuestion
     }
+
+    fun resetScore() {
+        _score.value = 0
+
+    }
 }

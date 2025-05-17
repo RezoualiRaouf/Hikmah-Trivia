@@ -2,12 +2,15 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+
     <uses-feature
         android:name="android.hardware.telephony"
         android:required="false" />
 
+
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
+
     <application
         android:name=".QuizApplication"
         android:allowBackup="true"
@@ -17,11 +20,12 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.DynamicQuiz"
+        android:theme="@style/Theme.QuizApp"
         tools:targetApi="31">
 
+
         <activity
-            android:name=".MainActivity"
+            android:name=".StartActivity"
             android:exported="true"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -29,6 +33,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+
+
+        <activity
+            android:name=".SettingsActivity"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+
 
         <receiver
             android:name=".PhoneCallReceiver"
@@ -49,5 +66,4 @@
             </intent-filter>
         </receiver>
     </application>
-
 </manifest>

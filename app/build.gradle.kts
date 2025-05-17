@@ -50,9 +50,11 @@ dependencies {
     implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
     implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.7.0")
     implementation ("androidx.activity:activity-ktx:1.8.2")
-
+    implementation ("androidx.preference:preference-ktx:1.2.0")
     // Animation libraries
     implementation ("androidx.core:core-animation:1.0.0-beta01")
+    implementation(libs.androidx.preference.ktx)
+    implementation(libs.androidx.preference)
 
     testImplementation ("junit:junit:4.13.2")
     androidTestImplementation ("androidx.test.ext:junit:1.1.5")

@@ -4,6 +4,6 @@
     <string name="score">Score: %1$d</string>
     <string name="next_question">Next Question</string>
     <string name="correct_answer">Correct!</string>
-    <string name="wrong_answer">Wrong Answer</string>
+    <string name="wrong_answer">Wrong Answer!</string>
     <string name="loading">Loading...</string>
 </resources>

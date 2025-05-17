@@ -1,33 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Base Material 3 colors -->
-    <color name="primary">#6750A4</color>
-    <color name="on_primary">#FFFFFF</color>
-    <color name="primary_container">#EADDFF</color>
-    <color name="on_primary_container">#21005D</color>
+    <!-- Basic -->
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
 
-    <color name="secondary">#625B71</color>
-    <color name="on_secondary">#FFFFFF</color>
-    <color name="secondary_container">#E8DEF8</color>
-    <color name="on_secondary_container">#1D192B</color>
+    <!-- Theme greens -->
+    <color name="primary_color">#388E3C</color>
+    <color name="primary_dark">#2E7D32</color>
+    <color name="primary_light">#81C784</color>
+    <color name="accent_color">#81C784</color>
 
-    <color name="tertiary">#7D5260</color>
-    <color name="on_tertiary">#FFFFFF</color>
-    <color name="tertiary_container">#FFD8E4</color>
-    <color name="on_tertiary_container">#31111D</color>
+    <!-- Quiz screen backgrounds -->
+    <color name="background">#81C784</color>         <!-- matches start screen bg -->
+    <color name="background_night">#2E7D32</color>   <!-- darker green for dark mode -->
 
-    <color name="background">#F5F0FF</color>
-    <color name="on_background">#1C1B1F</color>
-    <color name="surface">#FEF7FF</color>
-    <color name="on_surface">#1C1B1F</color>
+    <!-- Surfaces (cards, dialogs) -->
+    <color name="surface">#FFFFFF</color>
+    <color name="surface_night">#121212</color>
 
-    <color name="outline">#79747E</color>
-    <color name="outline_variant">#C4C7C5</color>
+    <!-- On‐surface text -->
+    <color name="on_surface">#212121</color>
+    <color name="on_surface_night">#E0E0E0</color>
 
-    <!-- Quiz specific colors -->
-    <color name="answer_button_background">#E8DEF8</color>
-    <color name="correct_answer">#2F9E44</color>
-    <color name="wrong_answer">#E03131</color>
-    <color name="dark_text">#1C1B1F</color>
+    <!-- Button default background (light mode) -->
+    <color name="answer_button_background">#E0E0E0</color>
+
+    <!-- Feedback colors -->
+    <color name="correct_answer">#4CAF50</color>
+    <color name="wrong_answer">#F44336</color>
+
+    <!-- Notification text color -->
     <color name="light_text">#FFFFFF</color>
 </resources>
