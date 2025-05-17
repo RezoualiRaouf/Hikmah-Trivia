@@ -1,26 +1,21 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme for Night mode -->
     <style name="Theme.QuizApp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <!-- Core color roles -->
-        <item name="colorPrimary">@color/primary_dark</item>
-        <item name="colorPrimaryVariant">@color/primary_color</item>
+        <item name="colorPrimary">@color/primary_dark</item> <!-- #2E7D32 -->
+        <item name="colorPrimaryVariant">@color/primary_dark</item>
         <item name="colorOnPrimary">@color/white</item>
 
         <item name="colorSecondary">@color/accent_color</item>
         <item name="colorOnSecondary">@color/black</item>
 
-        <!-- Surfaces -->
-        <item name="colorSurface">@color/surface_night</item>
-        <item name="colorOnSurface">@color/on_surface_night</item>
+        <!-- Override card backgrounds in night mode -->
+        <item name="cardViewStyle">@style/QuizCardStyle</item>
 
-        <!-- Background for windows -->
-        <item name="android:windowBackground">@color/background_night</item>
+        <!-- Background colors -->
+        <item name="android:windowBackground">@color/primary_dark</item>
+        <item name="materialCardViewStyle">@style/QuizCardStyle</item>
+    </style>
 
-        <!-- Status bar -->
-        <item name="android:statusBarColor">@color/primary_color</item>
-
-        <!-- Material button default style -->
-        <item name="materialButtonStyle">@style/Widget.MaterialComponents.Button</item>
+    <style name="QuizCardStyle" parent="Widget.MaterialComponents.CardView">
+        <item name="cardBackgroundColor">@color/white</item>
     </style>
 </resources>

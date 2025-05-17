@@ -1,6 +1,5 @@
 package com.projetapp
 
-
 import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
@@ -104,14 +103,36 @@ class DatabaseHelper(context: Context) :
         return count
     }
 
+    // Track questions that have been shown
+    private val shownQuestionIds = mutableSetOf<Int>()
+
     /**
-     * Get a random question from the database
+     * Get a random question from the database that hasn't been shown recently
      */
     suspend fun getRandomQuestion(): QuizQuestion = withContext(Dispatchers.IO) {
         val db = readableDatabase
-        val query = "SELECT * FROM $TABLE_QUESTIONS ORDER BY RANDOM() LIMIT 1"
-        val cursor = db.rawQuery(query, null)
         lateinit var question: QuizQuestion
+
+        // Get total number of questions
+        val countQuery = "SELECT COUNT(*) FROM $TABLE_QUESTIONS"
+        val countCursor = db.rawQuery(countQuery, null)
+        val totalQuestions = if (countCursor.moveToFirst()) countCursor.getInt(0) else 0
+        countCursor.close()
+
+        // Reset shown questions if we've shown all questions
+        if (shownQuestionIds.size >= totalQuestions) {
+            shownQuestionIds.clear()
+        }
+
+        // Query to exclude already shown questions
+        val excludeIds = if (shownQuestionIds.isEmpty()) {
+            ""
+        } else {
+            " WHERE $COLUMN_ID NOT IN (${shownQuestionIds.joinToString(",")})"
+        }
+
+        val query = "SELECT * FROM $TABLE_QUESTIONS$excludeIds ORDER BY RANDOM() LIMIT 1"
+        val cursor = db.rawQuery(query, null)
 
         if (cursor.moveToFirst()) {
             val id = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_ID))
@@ -125,6 +146,7 @@ class DatabaseHelper(context: Context) :
             val correctOptionIndex = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_CORRECT_OPTION))
 
             question = QuizQuestion(id, questionText, options, correctOptionIndex)
+            shownQuestionIds.add(id)
         } else {
             // If no questions found, create a default one (this should not happen if setup correctly)
             Log.e(TAG, "No questions found in database")
@@ -162,65 +184,66 @@ class DatabaseHelper(context: Context) :
      */
     private fun getSampleQuestions(): List<QuizQuestion> {
         return listOf(
+            // Islamic quiz questions
             QuizQuestion(
                 id = 1,
-                questionText = "What is the capital of France?",
-                options = listOf("London", "Paris", "Berlin", "Madrid"),
-                correctOptionIndex = 1
+                questionText = "كم عدد أركان الإيمان؟",
+                options = listOf("خمسة", "سبعة", "ستة", "ثمانية"),
+                correctOptionIndex = 2 // Index is 0-based, so 2 means the third option "ستة"
             ),
             QuizQuestion(
                 id = 2,
-                questionText = "Which planet is known as the Red Planet?",
-                options = listOf("Venus", "Mars", "Jupiter", "Saturn"),
-                correctOptionIndex = 1
+                questionText = "ما هو أول واجب على العباد؟",
+                options = listOf("الصلاة", "الشهادتان", "الصوم", "الزكاة"),
+                correctOptionIndex = 1 // "الشهادتان"
             ),
             QuizQuestion(
                 id = 3,
-                questionText = "What is the largest mammal on Earth?",
-                options = listOf("Elephant", "Giraffe", "Blue Whale", "Hippopotamus"),
-                correctOptionIndex = 2
+                questionText = "كم عدد سور القرآن الكريم؟",
+                options = listOf("112", "113", "114", "115"),
+                correctOptionIndex = 2 // "114"
             ),
             QuizQuestion(
                 id = 4,
-                questionText = "Who wrote 'Romeo and Juliet'?",
-                options = listOf("Charles Dickens", "William Shakespeare", "Jane Austen", "Mark Twain"),
-                correctOptionIndex = 1
+                questionText = "ما هي أطول سورة في القرآن؟",
+                options = listOf("البقرة", "آل عمران", "النساء", "الأنعام"),
+                correctOptionIndex = 0 // "البقرة"
             ),
             QuizQuestion(
                 id = 5,
-                questionText = "What is the chemical symbol for gold?",
-                options = listOf("Go", "Gd", "Au", "Ag"),
-                correctOptionIndex = 2
+                questionText = "في أي عام وُلد النبي محمد ﷺ؟",
+                options = listOf("عام الفيل", "عام الحزن", "عام الهجرة", "عام بدر"),
+                correctOptionIndex = 0 // "عام الفيل"
             ),
             QuizQuestion(
                 id = 6,
-                questionText = "What is the main component of the Earth's atmosphere?",
-                options = listOf("Oxygen", "Carbon Dioxide", "Nitrogen", "Hydrogen"),
-                correctOptionIndex = 2
+                questionText = "من هو جامع صحيح البخاري؟",
+                options = listOf("مسلم بن الحجاج", "أحمد بن حنبل", "محمد بن إسماعيل البخاري", "ابن ماجه"),
+                correctOptionIndex = 2 // "محمد بن إسماعيل البخاري"
             ),
             QuizQuestion(
                 id = 7,
-                questionText = "Which country is home to the kangaroo?",
-                options = listOf("New Zealand", "South Africa", "Australia", "Brazil"),
-                correctOptionIndex = 2
+                questionText = "ما حكم تارك الصلاة جحوداً؟",
+                options = listOf("فاسق", "مذنب", "كافر", "عاصي"),
+                correctOptionIndex = 2 // "كافر"
             ),
             QuizQuestion(
                 id = 8,
-                questionText = "How many sides does a hexagon have?",
-                options = listOf("5", "6", "7", "8"),
-                correctOptionIndex = 1
+                questionText = "ما هي أنواع التوحيد؟",
+                options = listOf("توحيد الربوبية فقط", "توحيد الألوهية فقط", "الربوبية والألوهية والأسماء والصفات", "لا يوجد أنواع"),
+                correctOptionIndex = 2 // "الربوبية والألوهية والأسماء والصفات"
             ),
             QuizQuestion(
                 id = 9,
-                questionText = "What is the largest organ in the human body?",
-                options = listOf("Brain", "Liver", "Heart", "Skin"),
-                correctOptionIndex = 3
+                questionText = "كم استمرت الدعوة السرية للإسلام؟",
+                options = listOf("سنة واحدة", "ثلاث سنوات", "خمس سنوات", "عشر سنوات"),
+                correctOptionIndex = 1 // "ثلاث سنوات"
             ),
             QuizQuestion(
                 id = 10,
-                questionText = "Which is the longest river in the world?",
-                options = listOf("Amazon", "Nile", "Mississippi", "Yangtze"),
-                correctOptionIndex = 1
+                questionText = "ما هي السورة التي لا تبدأ بالبسملة؟",
+                options = listOf("التوبة", "الأنفال", "الفتح", "الجمعة"),
+                correctOptionIndex = 0 // "التوبة"
             )
         )
     }

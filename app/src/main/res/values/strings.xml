@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Dynamic Quiz</string>
+    <string name="app_name">Hikmah Trivia</string>
     <string name="app_title">Dynamic Quiz</string>
     <string name="score">Score: %1$d</string>
     <string name="next_question">Next Question</string>
